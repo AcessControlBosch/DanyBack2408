@@ -133,7 +133,7 @@ class typeAssocienteAPI(APIView):
     def delete(self, request, pk=""):
 
         typeAssocienteResults = typeAssociente.objects.get(id=pk)       
-        typeAssociente.delete()
+        typeAssocienteResults.delete()
         return Response({"msg": "Apagado com sucesso"})
 
 class AssociateAPI(APIView):
@@ -146,28 +146,28 @@ class AssociateAPI(APIView):
             return Response(serializer.data)
 
         else:
-            associateResult = Associate.objects.get(id=pk)
+            associateResult = Associate.objects.get(idAssociateFK=pk)
             serializer = AssociateTable(associateResult)
             return Response(serializer.data)
 
     def post(self, request):
 
-        serializer = AssocienteTable(data=request.data, many=True)
+        serializer = AssociateTable(data=request.data, many=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()        
         return Response({"msg": "Inserido com sucesso"})
     
     def put(self, request, pk=''):
 
-        AssocienteResults = Associente.objects.get(id=pk)
-        serializer = AssocienteTable(AssocienteResults, data=request.data)
+        AssocienteResults = Associate.objects.get(id=pk)
+        serializer = AssociateTable(AssocienteResults, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
     
     def delete(self, request, pk=''):
 
-        AssocienteResults = Associente.objects.get(id=pk)       
+        AssocienteResults = Associate.objects.get(id=pk)       
         AssocienteResults.delete()
         return Response({"msg": "Apagado com sucesso"})
 
@@ -491,4 +491,76 @@ class MaintenanceOrderAPI(APIView):
 
         MaintenanceOrderTableResult = MaintenanceOrder.objects.get(id=pk)       
         MaintenanceOrderTableResult.delete()
+        return Response({"msg": "Apagado com sucesso"})
+
+class AreaAPI(APIView):
+
+    def get(self, request, pk=''):
+
+        if pk == '':
+            AreaResult = Areas.objects.all()
+            serializer = AreasTable(AreaResult, many=True)
+            return Response(serializer.data)
+
+        else:
+            AreaResult = Areas.objects.get(id=pk)
+            serializer = AreasTable(AreaResult)
+            return Response(serializer.data)
+
+
+    def post(self, request):
+
+        serializer = AreasTable(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()        
+        return Response({"msg": "Inserido com sucesso"})
+    
+    def put(self, request, pk=''):
+
+        AreaResult = Areas.objects.get(id=pk)
+        serializer = AreasTable(AreaResult, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    
+    def delete(self, request, pk=''):
+
+        AreaResult = Areas.objects.get(id=pk)       
+        AreaResult.delete()
+        return Response({"msg": "Apagado com sucesso"})
+
+class RequestLoginAPI(APIView):
+
+    def get(self, request, pk=''):
+
+        if pk == '':
+            RequestLoginResult = RequestLogin.objects.all()
+            serializer = RequestLoginTable(RequestLoginResult, many=True)
+            return Response(serializer.data)
+
+        else:
+            RequestLoginResult = RequestLogin.objects.get(id=pk)
+            serializer = RequestLoginTable(RequestLoginResult)
+            return Response(serializer.data)
+
+
+    def post(self, request):
+
+        serializer = RequestLoginTable(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()        
+        return Response({"msg": "Inserido com sucesso"})
+    
+    def put(self, request, pk=''):
+
+        RequestLoginResult = RequestLogin.objects.get(id=pk)
+        serializer = RequestLoginTable(RequestLoginResult, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    
+    def delete(self, request, pk=''):
+
+        RequestLoginResult = RequestLogin.objects.get(id=pk)       
+        RequestLoginResult.delete()
         return Response({"msg": "Apagado com sucesso"})

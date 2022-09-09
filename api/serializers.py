@@ -37,11 +37,12 @@ class typeAssocienteTable(serializers.ModelSerializer):
     class Meta: 
         many = True
         model = typeAssociente
-        fields = '__all__' 
+        fields = ['type'] 
 
 class AssociateTable(serializers.ModelSerializer):
 
     idAssociateFK = UserTable(read_only=True)
+    type = typeAssocienteTable(read_only=True)
 
     class Meta: 
         many = True
@@ -115,3 +116,16 @@ class MaintenanceOrderTable(serializers.ModelSerializer):
         model = MaintenanceOrder
         fields = '__all__'
 
+class AreasTable(serializers.ModelSerializer):
+
+    class Meta: 
+        many = True
+        model = Areas
+        fields = '__all__'
+
+class RequestLoginTable(serializers.ModelSerializer):
+
+    class Meta: 
+        many = True
+        model = RequestLogin
+        fields = '__all__'

@@ -4,8 +4,6 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
     path("users/", UserAPI.as_view(), name="users"),
     path("users/<int:pk>/", UserAPI.as_view(), name="usersParameters"),
 
@@ -46,5 +44,11 @@ urlpatterns = [
 
     path("maintenanceorders/", MaintenanceOrderAPI.as_view(), name="maintenanceorders"),
     path("maintenanceorders/<int:pk>/", MaintenanceOrderAPI.as_view(), name="maintenanceordersParameters"),
+
+    path("areas/", AreaAPI.as_view(), name="areas"),
+    path("areas/<int:pk>/", AreaAPI.as_view(), name="areasParameters"),
+
+    path("requestLogins/", RequestLoginAPI.as_view(), name="requestLogins"),
+    path("requestLogins/<int:pk>/", RequestLoginAPI.as_view(), name="requestLoginsParameters"),
 
 ]
